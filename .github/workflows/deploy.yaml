@@ -3,8 +3,9 @@ on:
   push:
     branches:
       - main
- 
-docker:
+
+jobs:
+  docker:
     runs-on: ubuntu-latest
     steps:
       -
