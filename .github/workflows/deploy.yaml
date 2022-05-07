@@ -25,9 +25,8 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           file: ./Dockerfile.dev
-          push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/docker-react:latest
       -
         name: Run tests
-        run: docker-compose run test
+        run: docker run -e CI=true ${{ secrets.DOCKER_USERNAME }}/docker-react npm test
 
