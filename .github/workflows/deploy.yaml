@@ -37,6 +37,9 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/docker-react:latest
+     -
+        name: Checkout source code
+        uses: actions/checkout@v2
       - 
         name: Generate deployment package
         run: zip -r deploy.zip . -x '*.git*'
