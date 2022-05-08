@@ -27,7 +27,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: user/docker-react:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/docker-react:latest
 
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v20
