@@ -1,7 +1,7 @@
 {
     "AWSEBDockerrunVersion": "1",
     "Image": {
-        "Name": "docker-react/hello:latest",
+        "Name": "user/docker-react:latest",
         "Update": "true"
     },
     "Ports": [
