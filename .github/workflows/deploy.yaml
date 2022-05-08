@@ -24,7 +24,8 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v3
         with:
-          files: ./Dockerfile
+          context: .
+          file: ./Dockerfile
           push: true
           tags: user/docker-react:latest
 
