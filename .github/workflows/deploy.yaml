@@ -9,14 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
-      - name: Docker Login
       - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Build for Docker test
       - run: docker build -t cygnetops/react-test -f Dockerfile.dev .
-
-      - name: Docker TEST for Docker test
       - run: docker run -e CI=true cygnetops/react-test npm test
 
       - name: Set up Docker Buildx
