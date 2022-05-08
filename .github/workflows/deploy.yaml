@@ -21,6 +21,16 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       -
+        name: Build and push test image
+        uses: docker/build-push-action@v3
+        with:
+          file: ./Dockerfile.dev
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/docker-react-test:latest
+      -
+        name: Run tests
+        run: docker run -e CI=true ${{ secrets.DOCKER_USERNAME }}/docker-react-test npm test
+      -
         name: Build and push
         uses: docker/build-push-action@v3
         with:
