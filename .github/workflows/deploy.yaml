@@ -31,3 +31,14 @@ jobs:
         name: Run tests
         run: docker run -e CI=true ${{ secrets.DOCKER_USERNAME }}/docker-react npm test
 
+      - name: Deploy to EB
+        uses: einaregilsson/beanstalk-deploy@v18
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
+          application_name: docker react
+          environment_name: Dockerreact-env-1
+          existing_bucket_name: elasticbeanstalk-us-east-1-988335325762
+          region: us-east-1
+          version_label: ${{ github.sha }}
+          deployment_package: deploy.zip
