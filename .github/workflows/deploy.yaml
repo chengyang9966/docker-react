@@ -10,16 +10,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      -
+     -
         name: Checkout source code
         uses: actions/checkout@v2
 
       - 
         name: Setup Node 
         uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-          cache: 'npm'
+            with:
+                node-version: '14'
+                cache: 'npm'
       - 
         name: NPM install 
         run: npm install
@@ -27,7 +27,6 @@ jobs:
       - 
         name: NPM run test  
         run: npm test
-      
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -51,17 +50,16 @@ jobs:
 
       - 
         name: Generate deployment package
-        run: git archive -o deploy.zip main 
+        run: zip -r deploy.zip . -x '*.git*'
 
       - name: Deploy to EB
         uses: einaregilsson/beanstalk-deploy@v20
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
           aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
-          application_name: docker react
-          environment_name: Dockerreact-env-1
+          application_name: react-app
+          environment_name: Reactapp-env
           existing_bucket_name: elasticbeanstalk-us-east-1-988335325762
-          use_existing_version_if_available: true
           region: us-east-1
           version_label: ${{ github.sha }}
           deployment_package: deploy.zip
